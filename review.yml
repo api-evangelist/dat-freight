@@ -1,0 +1,110 @@
+aid: dat-freight
+name: DAT Freight & Analytics
+review:
+  question: Does DAT Freight & Analytics expose a documented public WebSocket API?
+  answer: false
+  date: '2026-07-05'
+  reviewer: API Evangelist
+  asyncapiSpecCreated: false
+  asyncapiScopeNote: |
+    No AsyncAPI document was authored. DAT's developer surface is a RESTful
+    request/response API suite (DAT One load board, RateView, BookNow,
+    Tracking) reached over HTTPS from Transportation Management Systems. There
+    is no documented server-push transport (WebSocket or SSE) on DAT's own API.
+    DAT Tracking provides shipment location/status updates, but they are
+    retrieved by polling REST endpoints, not streamed over a socket. Because
+    the developer portal is gated behind an account login, no public reference
+    could even be inspected for a WebSocket surface - and none is referenced in
+    any of DAT's public marketing or third-party integration documentation.
+findings:
+  summary: |
+    DAT Freight & Analytics does not publish a documented public WebSocket API.
+    DAT operates the DAT One load board and the RateView freight-rate benchmark
+    and exposes them through the DAT Developer Portal (developer.dat.com) as a
+    RESTful API suite: load posting and search (LoadSearch), RateView rate
+    lookups, BookNow instant booking, and DAT Tracking shipment visibility.
+    Every request uses a documented two-tier token model - an organization
+    token minted from service-account credentials plus a user token for the
+    account making the call. All documented and third-party-described transport
+    is REST over HTTPS. No realtime, bidirectional, or streaming WebSocket
+    (ws:// or wss://) endpoint is referenced anywhere in DAT's public materials.
+  accessModel: |
+    Access is subscription-gated and the developer portal itself is behind an
+    OIDC account login (Redocly-hosted). RESTful API integration requires a DAT
+    One load board subscription and a service (organization) account; RateView
+    API access requires a Combo Pro or Combo Premium subscription plus Connexion
+    and RateView seats. CarrierWatch and OnBoard do not currently support
+    RESTful API integration. Access is requested via developersupport@dat.com.
+  endpointsModeled: true
+  endpointsModeledNote: |
+    Because the developer portal is account-gated, the exact base URLs, endpoint
+    paths, request parameters, and response schemas could not be confirmed
+    against the live reference during this build. The OpenAPI and collections in
+    this repository are HONESTLY MODELED from DAT's publicly documented
+    capabilities (LoadSearch for postings, RateView for analytics, BookNow,
+    Tracking) and its documented organization/user token authentication. The
+    host split (identity/freight/analytics .api.dat.com) is a plausible model,
+    not a confirmed fact, and should be reconciled once portal access is granted.
+  transports:
+    - protocol: REST
+      scheme: https
+      baseURL: https://freight.api.dat.com
+      documented: true
+      note: Load board search, freight posting, BookNow, and tracking (modeled host). Request/response REST.
+    - protocol: REST
+      scheme: https
+      baseURL: https://analytics.api.dat.com
+      documented: true
+      note: RateView spot and contract rate lookups (modeled host). Request/response REST.
+    - protocol: REST
+      scheme: https
+      baseURL: https://identity.api.dat.com
+      documented: true
+      note: Two-tier organization and user token issuance (modeled host).
+    - protocol: WebSocket
+      scheme: wss
+      documented: false
+      note: No WebSocket endpoint is referenced in any public DAT material or third-party integration guide as of the review date.
+  endpointsModeledRest:
+    - POST   https://identity.api.dat.com/access/v1/token/organization
+    - POST   https://identity.api.dat.com/access/v1/token/user
+    - POST   https://freight.api.dat.com/loadboard/v3/searches
+    - GET    https://freight.api.dat.com/loadboard/v2/assets
+    - POST   https://freight.api.dat.com/loadboard/v2/assets
+    - DELETE https://freight.api.dat.com/loadboard/v2/assets/{assetId}
+    - POST   https://analytics.api.dat.com/linehaulrates/v1/lookups
+    - POST   https://freight.api.dat.com/booknow/v1/bookings
+    - POST   https://freight.api.dat.com/tracking/v1/shipments
+    - GET    https://freight.api.dat.com/tracking/v1/shipments/{shipmentId}
+sources:
+  - url: https://www.dat.com/api-integration
+    type: Documentation
+    note: DAT API overview - Load Board, BookNow, Tracking, Freight Posting; developer portal + developersupport@dat.com.
+  - url: https://www.dat.com/resources/api-integration
+    type: Documentation
+    note: DAT APIs resource page; developer portal requires account creation.
+  - url: https://www.dat.com/resources/shipper-api-integrations
+    type: Documentation
+    note: Describes rate benchmarking, historical analysis, and lane-level performance via DAT APIs.
+  - url: https://one.support.dat.com/9-troubleshooting-2734b01a/service-accounts-and-restful-api-faq-7c689bc5
+    type: Documentation
+    note: Service accounts and RESTful API FAQ - two-tier org/user auth, RateView needs Combo Pro/Premium, CarrierWatch/OnBoard not supported over REST, seat requirements.
+  - url: https://developer.dat.com/
+    type: Documentation
+    note: DAT Developer Portal (Redocly-hosted, OIDC account login required). Reference not publicly inspectable.
+  - url: https://learn.tai-software.com/knowledge/dat-rest-activation
+    type: Documentation
+    note: Third-party TMS activation guide - service-account + user-level REST credentials.
+  - url: https://appscrip.com/blog/load-board-integration-with-dat/
+    type: Reference
+    note: Third-party integration write-up naming LoadSearch (postings) and RateView (analytics); cites ~$500-$1,000 setup fee and ~100/min rate limit (unconfirmed estimates).
+actions:
+  asyncapiPath: null
+  apisYmlUpdated: true
+  reason: |
+    No WebSocket protocol surface exists, and DAT's own public API is
+    request/response REST reached from a TMS with organization/user tokens. No
+    AsyncAPI document was created because there is no server-push transport on
+    DAT's own API to model. Endpoints are modeled (endpointsModeled: true)
+    because the developer portal is account-gated and the live reference could
+    not be inspected during this build.

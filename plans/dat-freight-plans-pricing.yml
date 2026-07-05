@@ -1,0 +1,123 @@
+specification: API Commons Plans
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/Plans
+provider: DAT Freight & Analytics
+providerId: dat-freight
+created: '2026-07-05'
+modified: '2026-07-05'
+reconciled: false
+tags:
+- Freight
+- Load Board
+- RateView
+- Freight Rates
+- Plans
+description: >-
+  DAT does not sell the API as a standalone metered product. API access rides on
+  top of a DAT One product subscription. RESTful integration requires a load
+  board subscription plus a service (organization) account, and RateView API
+  access requires a Combo Pro or Combo Premium subscription. Published,
+  reconciled DAT price points are not available on the public site - the numbers
+  below are third-party estimates and MUST be reconciled with a DAT sales quote.
+  Contact developersupport@dat.com for developer portal access.
+notes: >-
+  Setup fee (~$500-$1,000) and per-user subscription (~$50-$300/user/month,
+  brokers averaging ~$159) and transaction fees (~0.5-1% per load) are
+  third-party estimates from an integration write-up, not confirmed DAT list
+  prices. Any level of DAT One load board subscription enables RESTful API
+  integration; RateView API requires Combo Pro or Combo Premium.
+sources:
+- https://www.dat.com/api-integration
+- https://one.support.dat.com/9-troubleshooting-2734b01a/service-accounts-and-restful-api-faq-7c689bc5
+- https://appscrip.com/blog/load-board-integration-with-dat/
+plans:
+- id: dat-load-board
+  name: DAT One Load Board (API-enabled)
+  type: subscription
+  description: >-
+    A DAT One load board subscription. Any load board subscription level allows
+    a RESTful API integration for load posting and search once a service account
+    is provisioned. Price is per user and set by DAT sales.
+  entries:
+  - label: Load Board Subscription
+    name: load_board_seat
+    type: subscription
+    metric: seats
+    limit: -1
+    timeFrame: month
+    geo: north-america
+    unit: 1
+    price: contact sales (third-party estimate ~$50-$300/user/month)
+    userMultiplied: true
+  elements:
+  - name: Load Board Search API
+  - name: Freight Posting API
+  - name: BookNow API
+  - name: DAT Tracking API
+  - name: Service (Organization) Account
+- id: dat-rateview-combo-pro
+  name: RateView Combo Pro
+  type: subscription
+  description: >-
+    RateView subscription tier that unlocks RESTful RateView Rate Lookup API
+    access for spot and contract linehaul rates, requiring a Connexion seat and
+    a RateView seat.
+  entries:
+  - label: RateView Combo Pro Subscription
+    name: rateview_combo_pro
+    type: subscription
+    metric: seats
+    limit: -1
+    timeFrame: month
+    geo: north-america
+    unit: 1
+    price: contact sales
+    userMultiplied: true
+  elements:
+  - name: RateView Rate Lookup API
+  - name: Spot Rates
+  - name: Contract Rates
+- id: dat-rateview-combo-premium
+  name: RateView Combo Premium
+  type: subscription
+  description: >-
+    Higher RateView tier that also unlocks RESTful RateView Rate Lookup API
+    access, with broader rate history and analytics coverage.
+  entries:
+  - label: RateView Combo Premium Subscription
+    name: rateview_combo_premium
+    type: subscription
+    metric: seats
+    limit: -1
+    timeFrame: month
+    geo: north-america
+    unit: 1
+    price: contact sales
+    userMultiplied: true
+  elements:
+  - name: RateView Rate Lookup API
+  - name: Extended Rate History
+  - name: Lane-Level Analytics
+- id: dat-api-setup
+  name: API Integration Setup
+  type: one-time
+  description: >-
+    One-time onboarding/setup for a RESTful API integration and service account
+    provisioning. Amount is a third-party estimate and must be confirmed with DAT.
+  entries:
+  - label: One-Time Setup Fee
+    name: setup_fee
+    type: flat
+    metric: contract
+    limit: 1
+    timeFrame: once
+    geo: north-america
+    unit: 1
+    price: third-party estimate ~$500-$1,000 (confirm with DAT)
+    userMultiplied: false
+  elements:
+  - name: Service Account Provisioning
+  - name: Developer Portal Access
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

@@ -1,0 +1,150 @@
+{
+  "info": {
+    "name": "DAT Freight & Analytics API (Modeled)",
+    "description": "MODELED Postman collection for the DAT Freight & Analytics RESTful API suite (DAT One load board, RateView, BookNow, Tracking) exposed via the account-gated DAT Developer Portal (developer.dat.com). Because the portal reference is behind an OIDC login, base URLs, paths, and schemas are honestly modeled from DAT's documented capabilities and its two-tier organization/user token auth - not confirmed against the live reference. Auth: obtain an organization token from service-account credentials, then a user token, and send the user token as a Bearer token. Reconcile with the portal once access is granted.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      { "key": "token", "value": "{{userToken}}", "type": "string" }
+    ]
+  },
+  "variable": [
+    { "key": "identityBaseUrl", "value": "https://identity.api.dat.com", "type": "string" },
+    { "key": "freightBaseUrl", "value": "https://freight.api.dat.com", "type": "string" },
+    { "key": "analyticsBaseUrl", "value": "https://analytics.api.dat.com", "type": "string" },
+    { "key": "organizationToken", "value": "", "type": "string" },
+    { "key": "userToken", "value": "", "type": "string" }
+  ],
+  "item": [
+    {
+      "name": "Identity",
+      "item": [
+        {
+          "name": "Create organization token (modeled)",
+          "request": {
+            "auth": { "type": "noauth" },
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"username\": \"service-account@example.com\",\n  \"password\": \"\"\n}" },
+            "url": { "raw": "{{identityBaseUrl}}/access/v1/token/organization", "host": ["{{identityBaseUrl}}"], "path": ["access", "v1", "token", "organization"] },
+            "description": "MODELED. Exchange service-account (organization) credentials for an organization token."
+          }
+        },
+        {
+          "name": "Create user token (modeled)",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }, { "key": "Authorization", "value": "Bearer {{organizationToken}}" }],
+            "body": { "mode": "raw", "raw": "{\n  \"username\": \"user@example.com\"\n}" },
+            "url": { "raw": "{{identityBaseUrl}}/access/v1/token/user", "host": ["{{identityBaseUrl}}"], "path": ["access", "v1", "token", "user"] },
+            "description": "MODELED. Exchange an organization token plus a user identity for a user token."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Load Board Search",
+      "item": [
+        {
+          "name": "Search loads or trucks (modeled)",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"origin\": { \"city\": \"Chicago\", \"stateProvince\": \"IL\" },\n  \"destination\": { \"city\": \"Atlanta\", \"stateProvince\": \"GA\" },\n  \"equipmentType\": \"V\",\n  \"maxAgeMinutes\": 60\n}" },
+            "url": { "raw": "{{freightBaseUrl}}/loadboard/v3/searches", "host": ["{{freightBaseUrl}}"], "path": ["loadboard", "v3", "searches"] },
+            "description": "MODELED. LoadSearch against the DAT One marketplace by lane, equipment, and age."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Freight Posting",
+      "item": [
+        {
+          "name": "List postings (modeled)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{freightBaseUrl}}/loadboard/v2/assets", "host": ["{{freightBaseUrl}}"], "path": ["loadboard", "v2", "assets"] },
+            "description": "MODELED. List current load and truck postings."
+          }
+        },
+        {
+          "name": "Create posting (modeled)",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"assetType\": \"LOAD\",\n  \"origin\": { \"city\": \"Dallas\", \"stateProvince\": \"TX\" },\n  \"destination\": { \"city\": \"Denver\", \"stateProvince\": \"CO\" },\n  \"equipmentType\": \"R\",\n  \"rate\": 1850\n}" },
+            "url": { "raw": "{{freightBaseUrl}}/loadboard/v2/assets", "host": ["{{freightBaseUrl}}"], "path": ["loadboard", "v2", "assets"] },
+            "description": "MODELED. Post a load or truck to the DAT One load board."
+          }
+        },
+        {
+          "name": "Remove posting (modeled)",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": { "raw": "{{freightBaseUrl}}/loadboard/v2/assets/:assetId", "host": ["{{freightBaseUrl}}"], "path": ["loadboard", "v2", "assets", ":assetId"], "variable": [{ "key": "assetId", "value": "" }] },
+            "description": "MODELED. Remove a load or truck posting."
+          }
+        }
+      ]
+    },
+    {
+      "name": "RateView",
+      "item": [
+        {
+          "name": "Look up freight rates (modeled)",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"origin\": { \"city\": \"Los Angeles\", \"stateProvince\": \"CA\" },\n  \"destination\": { \"city\": \"Phoenix\", \"stateProvince\": \"AZ\" },\n  \"equipment\": \"V\",\n  \"rateType\": \"SPOT\"\n}" },
+            "url": { "raw": "{{analyticsBaseUrl}}/linehaulrates/v1/lookups", "host": ["{{analyticsBaseUrl}}"], "path": ["linehaulrates", "v1", "lookups"] },
+            "description": "MODELED. RateView spot/contract rate lookup. Requires RateView Combo Pro or Combo Premium."
+          }
+        }
+      ]
+    },
+    {
+      "name": "BookNow",
+      "item": [
+        {
+          "name": "Book a load (modeled)",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"assetId\": \"\",\n  \"carrierMcNumber\": \"\"\n}" },
+            "url": { "raw": "{{freightBaseUrl}}/booknow/v1/bookings", "host": ["{{freightBaseUrl}}"], "path": ["booknow", "v1", "bookings"] },
+            "description": "MODELED. Book a bookable (BookNow) load at its posted rate."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Tracking",
+      "item": [
+        {
+          "name": "Register shipment (modeled)",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"referenceNumber\": \"\",\n  \"carrierMcNumber\": \"\"\n}" },
+            "url": { "raw": "{{freightBaseUrl}}/tracking/v1/shipments", "host": ["{{freightBaseUrl}}"], "path": ["tracking", "v1", "shipments"] },
+            "description": "MODELED. Register a load for DAT Tracking visibility."
+          }
+        },
+        {
+          "name": "Get shipment status (modeled)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{freightBaseUrl}}/tracking/v1/shipments/:shipmentId", "host": ["{{freightBaseUrl}}"], "path": ["tracking", "v1", "shipments", ":shipmentId"], "variable": [{ "key": "shipmentId", "value": "" }] },
+            "description": "MODELED. Retrieve current location and status for a tracked shipment."
+          }
+        }
+      ]
+    }
+  ]
+}

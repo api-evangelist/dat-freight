@@ -1,0 +1,59 @@
+specification: API Commons Rate Limits
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/RateLimits
+provider: DAT Freight & Analytics
+providerId: dat-freight
+created: '2026-07-05'
+modified: '2026-07-05'
+reconciled: false
+tags:
+- Freight
+- Load Board
+- RateView
+- Rate Limiting
+- Quotas
+description: >-
+  DAT does not publish numeric API rate limits on its public site, and its
+  developer portal reference is gated behind an account login, so no official
+  per-minute or per-day request caps could be confirmed during this build. A
+  third-party integration write-up cites throttling around 100 requests/minute,
+  but it is unclear whether this is a DAT-enforced limit or an integrator
+  recommendation - treat it as an unconfirmed estimate. Access itself is gated
+  by subscription and seat entitlements (load board seat + Connexion for loads,
+  RateView seat + Connexion for rates) rather than by a published quota.
+notes: >-
+  Reconcile actual limits against the DAT Developer Portal once access is
+  granted. Clients should implement exponential backoff with jitter and honor
+  Retry-After on 429 responses.
+sources:
+- https://www.dat.com/api-integration
+- https://one.support.dat.com/9-troubleshooting-2734b01a/service-accounts-and-restful-api-faq-7c689bc5
+- https://appscrip.com/blog/load-board-integration-with-dat/
+responseCodes:
+  throttled: 429
+limits:
+- name: Overall API Requests
+  scope: account
+  metric: requests
+  limit: not published (third-party estimate ~100/min, unconfirmed)
+  notes: No official numeric request-rate limit is documented publicly; portal reference is account-gated.
+- name: RateView Rate Lookups
+  scope: account
+  metric: requests
+  limit: not published
+  notes: Governed by RateView Combo Pro/Premium entitlement rather than a published per-minute cap.
+- name: Load Board Access
+  scope: account
+  metric: seats
+  limit: per subscription
+  notes: Bounded by load board seat and Connexion seat entitlements, not a request quota.
+policies:
+- name: Subscription Gating
+  description: API access is gated by DAT One product subscription and seat entitlements rather than by a public quota.
+- name: Backoff Strategy
+  description: Implement exponential backoff with jitter and honor Retry-After on 429 responses.
+- name: Token Refresh
+  description: Refresh organization and user tokens before expiry to avoid 401-driven retry storms.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

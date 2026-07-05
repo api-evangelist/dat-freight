@@ -1,0 +1,136 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "DAT Freight & Analytics API (Modeled)",
+    "version": "1.0-modeled",
+    "description": "MODELED Open Collection for the DAT Freight & Analytics RESTful API suite (DAT One load board, RateView, BookNow, Tracking). The DAT Developer Portal is account-gated, so base URLs, paths, and schemas are honestly modeled from DAT's documented capabilities and its two-tier organization/user token authentication - not confirmed against the live reference."
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{userToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": { "name": "Identity", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "Create organization token (modeled)", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://identity.api.dat.com/access/v1/token/organization",
+            "body": { "type": "json", "data": "{ \"username\": \"service-account@example.com\", \"password\": \"\" }" }
+          },
+          "docs": "MODELED. Exchange service-account (organization) credentials for an organization token."
+        },
+        {
+          "info": { "name": "Create user token (modeled)", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://identity.api.dat.com/access/v1/token/user",
+            "body": { "type": "json", "data": "{ \"username\": \"user@example.com\" }" }
+          },
+          "docs": "MODELED. Exchange an organization token plus a user identity for a user token."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Load Board Search", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "Search loads or trucks (modeled)", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://freight.api.dat.com/loadboard/v3/searches",
+            "body": { "type": "json", "data": "{ \"origin\": { \"city\": \"Chicago\", \"stateProvince\": \"IL\" }, \"destination\": { \"city\": \"Atlanta\", \"stateProvince\": \"GA\" }, \"equipmentType\": \"V\", \"maxAgeMinutes\": 60 }" }
+          },
+          "docs": "MODELED. LoadSearch against the DAT One marketplace by lane, equipment, and age."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Freight Posting", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "List postings (modeled)", "type": "http" },
+          "http": { "method": "GET", "url": "https://freight.api.dat.com/loadboard/v2/assets" },
+          "docs": "MODELED. List current load and truck postings."
+        },
+        {
+          "info": { "name": "Create posting (modeled)", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://freight.api.dat.com/loadboard/v2/assets",
+            "body": { "type": "json", "data": "{ \"assetType\": \"LOAD\", \"origin\": { \"city\": \"Dallas\", \"stateProvince\": \"TX\" }, \"destination\": { \"city\": \"Denver\", \"stateProvince\": \"CO\" }, \"equipmentType\": \"R\", \"rate\": 1850 }" }
+          },
+          "docs": "MODELED. Post a load or truck to the DAT One load board."
+        },
+        {
+          "info": { "name": "Remove posting (modeled)", "type": "http" },
+          "http": {
+            "method": "DELETE",
+            "url": "https://freight.api.dat.com/loadboard/v2/assets/:assetId",
+            "params": [
+              { "name": "assetId", "value": "", "type": "path", "description": "The posting (asset) ID." }
+            ]
+          },
+          "docs": "MODELED. Remove a load or truck posting."
+        }
+      ]
+    },
+    {
+      "info": { "name": "RateView", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "Look up freight rates (modeled)", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://analytics.api.dat.com/linehaulrates/v1/lookups",
+            "body": { "type": "json", "data": "{ \"origin\": { \"city\": \"Los Angeles\", \"stateProvince\": \"CA\" }, \"destination\": { \"city\": \"Phoenix\", \"stateProvince\": \"AZ\" }, \"equipment\": \"V\", \"rateType\": \"SPOT\" }" }
+          },
+          "docs": "MODELED. RateView spot/contract rate lookup. Requires RateView Combo Pro or Combo Premium."
+        }
+      ]
+    },
+    {
+      "info": { "name": "BookNow", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "Book a load (modeled)", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://freight.api.dat.com/booknow/v1/bookings",
+            "body": { "type": "json", "data": "{ \"assetId\": \"\", \"carrierMcNumber\": \"\" }" }
+          },
+          "docs": "MODELED. Book a bookable (BookNow) load at its posted rate."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Tracking", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "Register shipment (modeled)", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://freight.api.dat.com/tracking/v1/shipments",
+            "body": { "type": "json", "data": "{ \"referenceNumber\": \"\", \"carrierMcNumber\": \"\" }" }
+          },
+          "docs": "MODELED. Register a load for DAT Tracking visibility."
+        },
+        {
+          "info": { "name": "Get shipment status (modeled)", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://freight.api.dat.com/tracking/v1/shipments/:shipmentId",
+            "params": [
+              { "name": "shipmentId", "value": "", "type": "path", "description": "The tracked shipment ID." }
+            ]
+          },
+          "docs": "MODELED. Retrieve current location and status for a tracked shipment."
+        }
+      ]
+    }
+  ]
+}
