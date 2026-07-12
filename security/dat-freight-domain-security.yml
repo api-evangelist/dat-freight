@@ -1,0 +1,27 @@
+generated: '2026-07-11'
+method: probed
+source: live DNS/TLS/HTTP probes of apis.yml + OpenAPI hosts
+hosts:
+- host: www.dat.com
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Sep 17 16:01:46 2026 GMT
+  hsts: true
+  hsts_max_age: 300
+- host: developer.dat.com
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Sep 17 10:07:55 2026 GMT
+  hsts: null
+- host: identity.api.dat.com
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Sep 30 23:55:59 2026 GMT
+  hsts: null
+domains:
+- domain: dat.com
+  dnssec: false
+  caa: []
+  spf: true
+  dmarc: true
+  dmarc_policy: quarantine

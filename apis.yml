@@ -185,6 +185,10 @@ apis:
     location and status updates for in-transit freight. Endpoint paths are
     modeled.
 common:
+- type: DomainSecurity
+  url: security/dat-freight-domain-security.yml
+- type: Authentication
+  url: authentication/dat-freight-authentication.yml
 - type: LinkedIn
   url: https://www.linkedin.com/company/dat-solutions
 - type: Website
