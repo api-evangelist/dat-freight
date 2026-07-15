@@ -185,6 +185,8 @@ apis:
     location and status updates for in-transit freight. Endpoint paths are
     modeled.
 common:
+- type: AgenticAccess
+  url: agentic-access/dat-freight-agentic-access.yml
 - type: DomainSecurity
   url: security/dat-freight-domain-security.yml
 - type: Authentication
