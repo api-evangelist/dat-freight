@@ -1,0 +1,92 @@
+openapi: 3.0.3
+info:
+  title: DAT Freight & Analytics API (Modeled) BookNow API
+  description: 'A modeled OpenAPI description of the DAT Freight & Analytics RESTful API suite exposed through the DAT Developer Portal (developer.dat.com). DAT operates the DAT One load board and RateView freight-rate benchmark and offers RESTful integrations for load posting and search, RateView rate lookups, BookNow instant booking, and shipment tracking, primarily for Transportation Management Systems (TMS) and freight platforms.
+
+
+    IMPORTANT - MODELED: The developer portal is gated behind an account login (Redocly OIDC), so the exact base URLs, endpoint paths, request parameters, and response schemas below could NOT be confirmed against the live reference in this build. They are honestly modeled from DAT''s publicly documented capabilities (LoadSearch for postings, RateView for analytics) and its documented two-tier organization/user token authentication. The host names (identity.api.dat.com, freight.api.dat.com, analytics.api.dat.com) represent the plausible service split and should be reconciled against the portal once access is granted.
+
+
+    Access is subscription-gated. RESTful integration requires a DAT One load board subscription plus a service (organization) account; RateView access requires a Combo Pro or Combo Premium subscription. CarrierWatch and OnBoard do not currently support RESTful API integration. Contact developersupport@dat.com for portal access.'
+  version: 1.0-modeled
+  contact:
+    name: DAT Developer Support
+    url: https://developer.dat.com/
+    email: developersupport@dat.com
+  x-modeled: true
+  x-endpointsModeled: true
+servers:
+- url: https://identity.api.dat.com
+  description: Identity / token service (modeled host)
+- url: https://freight.api.dat.com
+  description: Freight - load board, posting, BookNow, tracking (modeled host)
+- url: https://analytics.api.dat.com
+  description: Analytics - RateView rate lookups (modeled host)
+security:
+- userToken: []
+tags:
+- name: BookNow
+  description: Instant digital load booking.
+paths:
+  /booknow/v1/bookings:
+    post:
+      operationId: createBooking
+      tags:
+      - BookNow
+      summary: Book a load (modeled)
+      description: Book a bookable (BookNow) load at its posted rate. MODELED path.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BookingRequest'
+      responses:
+        '201':
+          description: The created booking.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Booking'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+components:
+  schemas:
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+    Booking:
+      type: object
+      properties:
+        id:
+          type: string
+        assetId:
+          type: string
+        status:
+          type: string
+    BookingRequest:
+      type: object
+      required:
+      - assetId
+      properties:
+        assetId:
+          type: string
+        carrierMcNumber:
+          type: string
+  responses:
+    Unauthorized:
+      description: Missing or invalid token.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  securitySchemes:
+    userToken:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: User access token obtained from POST /access/v1/token/user, which itself requires an organization token from POST /access/v1/token/organization.
