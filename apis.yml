@@ -15,7 +15,20 @@ description: >-
   access requires a Combo Pro or Combo Premium plan. Every request is
   authenticated with a two-tier token model - an organization token issued from
   service-account credentials plus a user token for the account making the call.
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: paid
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Paid · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/dat-freight.png
 tags:
 - Freight
 - Trucking
@@ -30,160 +43,144 @@ created: '2026-07-05'
 modified: '2026-07-05'
 specificationVersion: '0.19'
 apis:
-- aid: dat-freight:dat-freight-identity-token-api
-  name: DAT Identity & Token API
-  tags:
-  - Authentication
-  - OAuth
-  - Tokens
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+- aid: dat-freight:dat-freight-booknow-api
+  name: DAT Freight & Analytics BookNow API
+  description: Instant digital load booking.
   humanURL: https://developer.dat.com/
   baseURL: https://identity.api.dat.com
-  properties:
-  - url: https://developer.dat.com/
-    type: Documentation
-  - url: https://one.support.dat.com/9-troubleshooting-2734b01a/service-accounts-and-restful-api-faq-7c689bc5
-    type: Documentation
-  - url: openapi/dat-freight-openapi.yml
-    type: OpenAPI
-  - url: collections/dat-freight.postman_collection.json
-    type: PostmanCollection
-  - url: collections/dat-freight.opencollection.json
-    type: OpenCollection
-  description: >-
-    Issues the two-tier access tokens every other DAT API requires. An
-    organization token is minted from service-account (organization) credentials,
-    and a user token is minted for the specific user account making requests.
-    Endpoints and paths are modeled - the live token service sits behind the
-    account-gated developer portal.
-- aid: dat-freight:dat-freight-load-board-search-api
-  name: DAT Load Board Search API
-  tags:
-  - Load Board
-  - Loads
-  - Trucks
-  - Search
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://www.dat.com/api-integration
-  baseURL: https://freight.api.dat.com
-  properties:
-  - url: https://www.dat.com/api-integration
-    type: Documentation
-  - url: https://developer.dat.com/
-    type: Documentation
-  - url: openapi/dat-freight-openapi.yml
-    type: OpenAPI
-  - url: collections/dat-freight.postman_collection.json
-    type: PostmanCollection
-  - url: collections/dat-freight.opencollection.json
-    type: OpenCollection
-  description: >-
-    Search the DAT One marketplace for available loads and trucks by lane,
-    equipment type, age, and other filters - the LoadSearch surface used by TMS
-    integrations. Available with any DAT One load board subscription. Endpoint
-    paths are modeled against DAT's documented capabilities.
-- aid: dat-freight:dat-freight-posting-api
-  name: DAT Freight Posting API
-  tags:
-  - Freight Posting
-  - Loads
-  - Trucks
-  - Postings
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://www.dat.com/api-integration
-  baseURL: https://freight.api.dat.com
-  properties:
-  - url: https://www.dat.com/api-integration
-    type: Documentation
-  - url: https://developer.dat.com/
-    type: Documentation
-  - url: openapi/dat-freight-openapi.yml
-    type: OpenAPI
-  - url: collections/dat-freight.postman_collection.json
-    type: PostmanCollection
-  - url: collections/dat-freight.opencollection.json
-    type: OpenCollection
-  description: >-
-    Create, update, refresh, and remove load and truck postings on the DAT One
-    load board directly from a TMS. Mirrors the manual posting workflow so
-    brokers and carriers can automate freight and capacity postings. Endpoint
-    paths are modeled.
-- aid: dat-freight:dat-freight-rateview-api
-  name: DAT RateView Rate Lookup API
-  tags:
-  - RateView
-  - Freight Rates
-  - Analytics
-  - Spot Rates
-  - Contract Rates
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://www.dat.com/resources/shipper-api-integrations
-  baseURL: https://analytics.api.dat.com
-  properties:
-  - url: https://www.dat.com/resources/shipper-api-integrations
-    type: Documentation
-  - url: https://one.support.dat.com/9-troubleshooting-2734b01a/service-accounts-and-restful-api-faq-7c689bc5
-    type: Documentation
-  - url: openapi/dat-freight-openapi.yml
-    type: OpenAPI
-  - url: collections/dat-freight.postman_collection.json
-    type: PostmanCollection
-  - url: collections/dat-freight.opencollection.json
-    type: OpenCollection
-  description: >-
-    Look up DAT RateView benchmark freight rates - spot and contract linehaul
-    rates by origin, destination, and equipment type - for rate benchmarking,
-    historical analysis, and lane-level performance. Requires a RateView Combo
-    Pro or Combo Premium subscription plus a Connexion and RateView seat.
-    Endpoint paths are modeled.
-- aid: dat-freight:dat-freight-booknow-api
-  name: DAT BookNow API
   tags:
   - BookNow
-  - Booking
-  - Loads
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://www.dat.com/api-integration
-  baseURL: https://freight.api.dat.com
   properties:
-  - url: https://www.dat.com/api-integration
-    type: Documentation
-  - url: https://developer.dat.com/
-    type: Documentation
-  - url: openapi/dat-freight-openapi.yml
-    type: OpenAPI
-  - url: collections/dat-freight.postman_collection.json
-    type: PostmanCollection
-  - url: collections/dat-freight.opencollection.json
-    type: OpenCollection
-  description: >-
-    Instant, digital load booking (BookNow) so carriers can accept a posted load
-    at a set rate without a phone call, and brokers can offer bookable freight
-    programmatically. Endpoint paths are modeled.
+  - type: OpenAPI
+    url: openapi/dat-freight-booknow-api-openapi.yml
+  - type: Documentation
+    url: https://developer.dat.com/
+  - type: Documentation
+    url: >-
+      https://one.support.dat.com/9-troubleshooting-2734b01a/service-accounts-and-restful-api-faq-7c689bc5
+  - type: PostmanCollection
+    url: collections/dat-freight.postman_collection.json
+  - type: OpenCollection
+    url: collections/dat-freight.opencollection.json
+  - type: Documentation
+    url: https://www.dat.com/api-integration
+  - type: Documentation
+    url: https://www.dat.com/resources/shipper-api-integrations
+- aid: dat-freight:dat-freight-freight-posting-api
+  name: DAT Freight & Analytics Freight Posting API
+  description: Create and manage load and truck postings.
+  humanURL: https://developer.dat.com/
+  baseURL: https://identity.api.dat.com
+  tags:
+  - Freight Posting
+  properties:
+  - type: OpenAPI
+    url: openapi/dat-freight-freight-posting-api-openapi.yml
+  - type: Documentation
+    url: https://developer.dat.com/
+  - type: Documentation
+    url: >-
+      https://one.support.dat.com/9-troubleshooting-2734b01a/service-accounts-and-restful-api-faq-7c689bc5
+  - type: PostmanCollection
+    url: collections/dat-freight.postman_collection.json
+  - type: OpenCollection
+    url: collections/dat-freight.opencollection.json
+  - type: Documentation
+    url: https://www.dat.com/api-integration
+  - type: Documentation
+    url: https://www.dat.com/resources/shipper-api-integrations
+- aid: dat-freight:dat-freight-identity-api
+  name: DAT Freight & Analytics Identity API
+  description: Two-tier organization and user token issuance.
+  humanURL: https://developer.dat.com/
+  baseURL: https://identity.api.dat.com
+  tags:
+  - Identity
+  properties:
+  - type: OpenAPI
+    url: openapi/dat-freight-identity-api-openapi.yml
+  - type: Documentation
+    url: https://developer.dat.com/
+  - type: Documentation
+    url: >-
+      https://one.support.dat.com/9-troubleshooting-2734b01a/service-accounts-and-restful-api-faq-7c689bc5
+  - type: PostmanCollection
+    url: collections/dat-freight.postman_collection.json
+  - type: OpenCollection
+    url: collections/dat-freight.opencollection.json
+  - type: Documentation
+    url: https://www.dat.com/api-integration
+  - type: Documentation
+    url: https://www.dat.com/resources/shipper-api-integrations
+- aid: dat-freight:dat-freight-load-board-search-api
+  name: DAT Freight & Analytics Load Board Search API
+  description: Search available loads and trucks on the DAT One marketplace.
+  humanURL: https://developer.dat.com/
+  baseURL: https://identity.api.dat.com
+  tags:
+  - Load Board Search
+  properties:
+  - type: OpenAPI
+    url: openapi/dat-freight-load-board-search-api-openapi.yml
+  - type: Documentation
+    url: https://developer.dat.com/
+  - type: Documentation
+    url: >-
+      https://one.support.dat.com/9-troubleshooting-2734b01a/service-accounts-and-restful-api-faq-7c689bc5
+  - type: PostmanCollection
+    url: collections/dat-freight.postman_collection.json
+  - type: OpenCollection
+    url: collections/dat-freight.opencollection.json
+  - type: Documentation
+    url: https://www.dat.com/api-integration
+  - type: Documentation
+    url: https://www.dat.com/resources/shipper-api-integrations
+- aid: dat-freight:dat-freight-rateview-api
+  name: DAT Freight & Analytics RateView API
+  description: Spot and contract freight-rate lookups.
+  humanURL: https://developer.dat.com/
+  baseURL: https://identity.api.dat.com
+  tags:
+  - RateView
+  properties:
+  - type: OpenAPI
+    url: openapi/dat-freight-rateview-api-openapi.yml
+  - type: Documentation
+    url: https://developer.dat.com/
+  - type: Documentation
+    url: >-
+      https://one.support.dat.com/9-troubleshooting-2734b01a/service-accounts-and-restful-api-faq-7c689bc5
+  - type: PostmanCollection
+    url: collections/dat-freight.postman_collection.json
+  - type: OpenCollection
+    url: collections/dat-freight.opencollection.json
+  - type: Documentation
+    url: https://www.dat.com/api-integration
+  - type: Documentation
+    url: https://www.dat.com/resources/shipper-api-integrations
 - aid: dat-freight:dat-freight-tracking-api
-  name: DAT Tracking API
+  name: DAT Freight & Analytics Tracking API
+  description: Shipment location and status visibility.
+  humanURL: https://developer.dat.com/
+  baseURL: https://identity.api.dat.com
   tags:
   - Tracking
-  - Shipments
-  - Visibility
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://www.dat.com/api-integration
-  baseURL: https://freight.api.dat.com
   properties:
-  - url: https://www.dat.com/api-integration
-    type: Documentation
-  - url: https://developer.dat.com/
-    type: Documentation
-  - url: openapi/dat-freight-openapi.yml
-    type: OpenAPI
-  - url: collections/dat-freight.postman_collection.json
-    type: PostmanCollection
-  - url: collections/dat-freight.opencollection.json
-    type: OpenCollection
-  description: >-
-    DAT Tracking shipment visibility - register loads for tracking and retrieve
-    location and status updates for in-transit freight. Endpoint paths are
-    modeled.
+  - type: OpenAPI
+    url: openapi/dat-freight-tracking-api-openapi.yml
+  - type: Documentation
+    url: https://developer.dat.com/
+  - type: Documentation
+    url: >-
+      https://one.support.dat.com/9-troubleshooting-2734b01a/service-accounts-and-restful-api-faq-7c689bc5
+  - type: PostmanCollection
+    url: collections/dat-freight.postman_collection.json
+  - type: OpenCollection
+    url: collections/dat-freight.opencollection.json
+  - type: Documentation
+    url: https://www.dat.com/api-integration
+  - type: Documentation
+    url: https://www.dat.com/resources/shipper-api-integrations
 common:
 - type: AgenticAccess
   url: agentic-access/dat-freight-agentic-access.yml
