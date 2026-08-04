@@ -1,0 +1,489 @@
+openapi: 3.0.3
+info:
+  title: DAT Freight & Analytics API (Modeled)
+  description: >-
+    A modeled OpenAPI description of the DAT Freight & Analytics RESTful API
+    suite exposed through the DAT Developer Portal (developer.dat.com). DAT
+    operates the DAT One load board and RateView freight-rate benchmark and
+    offers RESTful integrations for load posting and search, RateView rate
+    lookups, BookNow instant booking, and shipment tracking, primarily for
+    Transportation Management Systems (TMS) and freight platforms.
+
+
+    IMPORTANT - MODELED: The developer portal is gated behind an account
+    login (Redocly OIDC), so the exact base URLs, endpoint paths, request
+    parameters, and response schemas below could NOT be confirmed against the
+    live reference in this build. They are honestly modeled from DAT's publicly
+    documented capabilities (LoadSearch for postings, RateView for analytics)
+    and its documented two-tier organization/user token authentication. The host
+    names (identity.api.dat.com, freight.api.dat.com, analytics.api.dat.com)
+    represent the plausible service split and should be reconciled against the
+    portal once access is granted.
+
+
+    Access is subscription-gated. RESTful integration requires a DAT One load
+    board subscription plus a service (organization) account; RateView access
+    requires a Combo Pro or Combo Premium subscription. CarrierWatch and OnBoard
+    do not currently support RESTful API integration. Contact
+    developersupport@dat.com for portal access.
+  version: '1.0-modeled'
+  contact:
+    name: DAT Developer Support
+    url: https://developer.dat.com/
+    email: developersupport@dat.com
+  x-modeled: true
+  x-endpointsModeled: true
+servers:
+  - url: https://identity.api.dat.com
+    description: Identity / token service (modeled host)
+  - url: https://freight.api.dat.com
+    description: Freight - load board, posting, BookNow, tracking (modeled host)
+  - url: https://analytics.api.dat.com
+    description: Analytics - RateView rate lookups (modeled host)
+security:
+  - userToken: []
+tags:
+  - name: Identity
+    description: Two-tier organization and user token issuance.
+  - name: Load Board Search
+    description: Search available loads and trucks on the DAT One marketplace.
+  - name: Freight Posting
+    description: Create and manage load and truck postings.
+  - name: RateView
+    description: Spot and contract freight-rate lookups.
+  - name: BookNow
+    description: Instant digital load booking.
+  - name: Tracking
+    description: Shipment location and status visibility.
+paths:
+  /access/v1/token/organization:
+    post:
+      operationId: createOrganizationToken
+      tags:
+        - Identity
+      summary: Create an organization token (modeled)
+      description: >-
+        Exchange service-account (organization) credentials for an organization
+        access token used to mint user tokens. MODELED path.
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OrganizationTokenRequest'
+      responses:
+        '200':
+          description: An organization access token.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TokenResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /access/v1/token/user:
+    post:
+      operationId: createUserToken
+      tags:
+        - Identity
+      summary: Create a user token (modeled)
+      description: >-
+        Exchange an organization token plus a user identity for a user access
+        token used on all data requests. MODELED path.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserTokenRequest'
+      responses:
+        '200':
+          description: A user access token.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TokenResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /loadboard/v3/searches:
+    post:
+      operationId: createLoadSearch
+      tags:
+        - Load Board Search
+      summary: Search loads or trucks (modeled)
+      description: >-
+        Run a LoadSearch against the DAT One marketplace by lane, equipment
+        type, age, and other filters. MODELED path and schema.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoadSearchRequest'
+      responses:
+        '200':
+          description: Matching load or truck postings.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LoadSearchResults'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /loadboard/v2/assets:
+    get:
+      operationId: listAssets
+      tags:
+        - Freight Posting
+      summary: List load and truck postings (modeled)
+      description: List the organization's current load and truck postings (assets). MODELED path.
+      responses:
+        '200':
+          description: A list of postings.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Asset'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    post:
+      operationId: createAsset
+      tags:
+        - Freight Posting
+      summary: Create a posting (modeled)
+      description: Post a load or truck to the DAT One load board. MODELED path.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AssetInput'
+      responses:
+        '201':
+          description: The created posting.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Asset'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /loadboard/v2/assets/{assetId}:
+    parameters:
+      - name: assetId
+        in: path
+        required: true
+        schema:
+          type: string
+    delete:
+      operationId: deleteAsset
+      tags:
+        - Freight Posting
+      summary: Remove a posting (modeled)
+      description: Remove a load or truck posting. MODELED path.
+      responses:
+        '204':
+          description: Posting removed.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /linehaulrates/v1/lookups:
+    post:
+      operationId: lookupRates
+      tags:
+        - RateView
+      summary: Look up RateView freight rates (modeled)
+      description: >-
+        Retrieve RateView spot and contract benchmark rates for one or more
+        lanes by origin, destination, and equipment type. Requires a RateView
+        Combo Pro or Combo Premium subscription. MODELED path and schema.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RateLookupRequest'
+      responses:
+        '200':
+          description: Rate lookup results.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RateLookupResults'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /booknow/v1/bookings:
+    post:
+      operationId: createBooking
+      tags:
+        - BookNow
+      summary: Book a load (modeled)
+      description: Book a bookable (BookNow) load at its posted rate. MODELED path.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BookingRequest'
+      responses:
+        '201':
+          description: The created booking.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Booking'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /tracking/v1/shipments:
+    post:
+      operationId: registerShipment
+      tags:
+        - Tracking
+      summary: Register a shipment for tracking (modeled)
+      description: Register a load for DAT Tracking shipment visibility. MODELED path.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ShipmentInput'
+      responses:
+        '201':
+          description: The registered shipment.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Shipment'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /tracking/v1/shipments/{shipmentId}:
+    parameters:
+      - name: shipmentId
+        in: path
+        required: true
+        schema:
+          type: string
+    get:
+      operationId: getShipment
+      tags:
+        - Tracking
+      summary: Get shipment status (modeled)
+      description: Retrieve current location and status for a tracked shipment. MODELED path.
+      responses:
+        '200':
+          description: The shipment tracking record.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Shipment'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+components:
+  securitySchemes:
+    userToken:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: >-
+        User access token obtained from POST /access/v1/token/user, which itself
+        requires an organization token from POST /access/v1/token/organization.
+  responses:
+    Unauthorized:
+      description: Missing or invalid token.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: Resource not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  schemas:
+    OrganizationTokenRequest:
+      type: object
+      required:
+        - username
+        - password
+      properties:
+        username:
+          type: string
+          description: Service-account (organization) email.
+        password:
+          type: string
+          description: Service-account password.
+    UserTokenRequest:
+      type: object
+      required:
+        - username
+      properties:
+        username:
+          type: string
+          description: Email of the user making requests.
+    TokenResponse:
+      type: object
+      properties:
+        accessToken:
+          type: string
+        expiresWhen:
+          type: string
+          format: date-time
+    LoadSearchRequest:
+      type: object
+      properties:
+        origin:
+          $ref: '#/components/schemas/Location'
+        destination:
+          $ref: '#/components/schemas/Location'
+        equipmentType:
+          type: string
+          description: Equipment code, e.g. V (van), R (reefer), F (flatbed).
+        maxAgeMinutes:
+          type: integer
+    LoadSearchResults:
+      type: object
+      properties:
+        matches:
+          type: array
+          items:
+            $ref: '#/components/schemas/Asset'
+    Asset:
+      type: object
+      properties:
+        id:
+          type: string
+        assetType:
+          type: string
+          enum:
+            - LOAD
+            - TRUCK
+        origin:
+          $ref: '#/components/schemas/Location'
+        destination:
+          $ref: '#/components/schemas/Location'
+        equipmentType:
+          type: string
+        rate:
+          type: number
+        postedWhen:
+          type: string
+          format: date-time
+    AssetInput:
+      type: object
+      required:
+        - assetType
+        - origin
+        - equipmentType
+      properties:
+        assetType:
+          type: string
+          enum:
+            - LOAD
+            - TRUCK
+        origin:
+          $ref: '#/components/schemas/Location'
+        destination:
+          $ref: '#/components/schemas/Location'
+        equipmentType:
+          type: string
+        rate:
+          type: number
+    RateLookupRequest:
+      type: object
+      required:
+        - origin
+        - destination
+        - equipment
+      properties:
+        origin:
+          $ref: '#/components/schemas/Location'
+        destination:
+          $ref: '#/components/schemas/Location'
+        equipment:
+          type: string
+        rateType:
+          type: string
+          enum:
+            - SPOT
+            - CONTRACT
+    RateLookupResults:
+      type: object
+      properties:
+        rate:
+          type: object
+          properties:
+            averageRate:
+              type: number
+            lowRate:
+              type: number
+            highRate:
+              type: number
+            currency:
+              type: string
+              example: USD
+            rateType:
+              type: string
+    BookingRequest:
+      type: object
+      required:
+        - assetId
+      properties:
+        assetId:
+          type: string
+        carrierMcNumber:
+          type: string
+    Booking:
+      type: object
+      properties:
+        id:
+          type: string
+        assetId:
+          type: string
+        status:
+          type: string
+    ShipmentInput:
+      type: object
+      required:
+        - referenceNumber
+      properties:
+        referenceNumber:
+          type: string
+        carrierMcNumber:
+          type: string
+    Shipment:
+      type: object
+      properties:
+        id:
+          type: string
+        status:
+          type: string
+        lastLocation:
+          $ref: '#/components/schemas/Location'
+        updatedWhen:
+          type: string
+          format: date-time
+    Location:
+      type: object
+      properties:
+        city:
+          type: string
+        stateProvince:
+          type: string
+        postalCode:
+          type: string
+        country:
+          type: string
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string

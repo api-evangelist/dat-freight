@@ -1,0 +1,24 @@
+{
+  "provider": "dat-freight",
+  "sources": [
+    "dat-freight-booknow-api-openapi.yml",
+    "dat-freight-freight-posting-api-openapi.yml",
+    "dat-freight-identity-api-openapi.yml",
+    "dat-freight-load-board-search-api-openapi.yml",
+    "dat-freight-rateview-api-openapi.yml",
+    "dat-freight-tracking-api-openapi.yml"
+  ],
+  "outputs": [
+    "dat-freight-booknow-api-openapi.yml",
+    "dat-freight-freight-posting-api-openapi.yml",
+    "dat-freight-identity-api-openapi.yml",
+    "dat-freight-load-board-search-api-openapi.yml",
+    "dat-freight-rateview-api-openapi.yml",
+    "dat-freight-tracking-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
