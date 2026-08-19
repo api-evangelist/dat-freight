@@ -1,0 +1,359 @@
+{
+  "item": [
+    {
+      "id": "0c0cf338-ecdb-4a61-8a6e-13534a69afa9",
+      "name": "Identity",
+      "description": {
+        "content": "Two-tier organization and user token issuance.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "2e4c90c6-598e-490b-a603-cd307ca3144d",
+          "name": "Create an organization token (modeled)",
+          "request": {
+            "name": "Create an organization token (modeled)",
+            "description": {
+              "content": "Exchange service-account (organization) credentials for an organization access token used to mint user tokens. MODELED path.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "access",
+                "v1",
+                "token",
+                "organization"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"<string>\",\n  \"password\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "ec0dd6e9-a780-4984-8c83-5ea1acfc5770",
+              "name": "An organization access token.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "access",
+                    "v1",
+                    "token",
+                    "organization"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"username\": \"<string>\",\n  \"password\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"accessToken\": \"string\",\n  \"expiresWhen\": \"1958-01-21T18:04:32.607Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "244ddb6f-57ba-43e0-83bd-6a1da69ece0c",
+              "name": "Missing or invalid token.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "access",
+                    "v1",
+                    "token",
+                    "organization"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"username\": \"<string>\",\n  \"password\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "35ccb973-fbe7-4a2e-9f2d-f10aac16df2a",
+          "name": "Create a user token (modeled)",
+          "request": {
+            "name": "Create a user token (modeled)",
+            "description": {
+              "content": "Exchange an organization token plus a user identity for a user access token used on all data requests. MODELED path.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "access",
+                "v1",
+                "token",
+                "user"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "bfedb1dd-00f1-4802-9a31-8ddd1f74a8a1",
+              "name": "A user access token.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "access",
+                    "v1",
+                    "token",
+                    "user"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"username\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"accessToken\": \"string\",\n  \"expiresWhen\": \"1958-01-21T18:04:32.607Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b999bc11-6f5e-4058-a5bb-caa58afff253",
+              "name": "Missing or invalid token.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "access",
+                    "v1",
+                    "token",
+                    "user"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"username\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://identity.api.dat.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "113fe5f6-3ba4-417c-b406-5044440be6ca",
+    "name": "DAT Freight & Analytics API (Modeled) BookNow Identity API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "A modeled OpenAPI description of the DAT Freight & Analytics RESTful API suite exposed through the DAT Developer Portal (developer.dat.com). DAT operates the DAT One load board and RateView freight-rate benchmark and offers RESTful integrations for load posting and search, RateView rate lookups, BookNow instant booking, and shipment tracking, primarily for Transportation Management Systems (TMS) and freight platforms.\n\nIMPORTANT - MODELED: The developer portal is gated behind an account login (Redocly OIDC), so the exact base URLs, endpoint paths, request parameters, and response schemas below could NOT be confirmed against the live reference in this build. They are honestly modeled from DAT's publicly documented capabilities (LoadSearch for postings, RateView for analytics) and its documented two-tier organization/user token authentication. The host names (identity.api.dat.com, freight.api.dat.com, analytics.api.dat.com) represent the plausible service split and should be reconciled against the portal once access is granted.\n\nAccess is subscription-gated. RESTful integration requires a DAT One load board subscription plus a service (organization) account; RateView access requires a Combo Pro or Combo Premium subscription. CarrierWatch and OnBoard do not currently support RESTful API integration. Contact developersupport@dat.com for portal access.\n\nContact Support:\n Name: DAT Developer Support\n Email: developersupport@dat.com",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,57 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "DAT Freight & Analytics API (Modeled) BookNow Tracking API",
+    "version": "1.0-modeled"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Tracking",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Register a shipment for tracking (modeled)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://identity.api.dat.com/tracking/v1/shipments",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Register a load for DAT Tracking shipment visibility. MODELED path."
+        },
+        {
+          "info": {
+            "name": "Get shipment status (modeled)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://identity.api.dat.com/tracking/v1/shipments/:shipmentId",
+            "params": [
+              {
+                "name": "shipmentId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieve current location and status for a tracked shipment. MODELED path."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

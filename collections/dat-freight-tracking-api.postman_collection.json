@@ -1,0 +1,405 @@
+{
+  "item": [
+    {
+      "id": "4d05efd4-f4cd-43b9-a205-eafa0933f13f",
+      "name": "Tracking",
+      "description": {
+        "content": "Shipment location and status visibility.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "139d6102-5906-4913-8cfb-bc9b74aa7625",
+          "name": "Register a shipment for tracking (modeled)",
+          "request": {
+            "name": "Register a shipment for tracking (modeled)",
+            "description": {
+              "content": "Register a load for DAT Tracking shipment visibility. MODELED path.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "tracking",
+                "v1",
+                "shipments"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"referenceNumber\": \"<string>\",\n  \"carrierMcNumber\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "e3286b5c-f0b7-4824-a14c-7379e230d610",
+              "name": "The registered shipment.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tracking",
+                    "v1",
+                    "shipments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"referenceNumber\": \"<string>\",\n  \"carrierMcNumber\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"status\": \"string\",\n  \"lastLocation\": {\n    \"city\": \"string\",\n    \"stateProvince\": \"string\",\n    \"postalCode\": \"string\",\n    \"country\": \"string\"\n  },\n  \"updatedWhen\": \"2014-02-02T12:52:07.633Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e698aa59-cde1-46e2-9f3d-82076380885e",
+              "name": "Missing or invalid token.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tracking",
+                    "v1",
+                    "shipments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"referenceNumber\": \"<string>\",\n  \"carrierMcNumber\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "00c55519-c57d-413d-9000-15c61e7fb199",
+          "name": "Get shipment status (modeled)",
+          "request": {
+            "name": "Get shipment status (modeled)",
+            "description": {
+              "content": "Retrieve current location and status for a tracked shipment. MODELED path.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "tracking",
+                "v1",
+                "shipments",
+                ":shipmentId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "shipmentId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "471f4a43-8dcf-4020-bbba-c72f22ad51fa",
+              "name": "The shipment tracking record.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tracking",
+                    "v1",
+                    "shipments",
+                    ":shipmentId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "shipmentId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"status\": \"string\",\n  \"lastLocation\": {\n    \"city\": \"string\",\n    \"stateProvince\": \"string\",\n    \"postalCode\": \"string\",\n    \"country\": \"string\"\n  },\n  \"updatedWhen\": \"2014-02-02T12:52:07.633Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "33d95005-1cb7-4d43-a818-c85b120fac10",
+              "name": "Missing or invalid token.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tracking",
+                    "v1",
+                    "shipments",
+                    ":shipmentId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "shipmentId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1cf56a0d-074c-4eb7-b407-f1771c8fa97c",
+              "name": "Resource not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tracking",
+                    "v1",
+                    "shipments",
+                    ":shipmentId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "shipmentId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://identity.api.dat.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "64b7c521-6dfb-4ca3-86a0-8da7280ba28b",
+    "name": "DAT Freight & Analytics API (Modeled) BookNow Tracking API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "A modeled OpenAPI description of the DAT Freight & Analytics RESTful API suite exposed through the DAT Developer Portal (developer.dat.com). DAT operates the DAT One load board and RateView freight-rate benchmark and offers RESTful integrations for load posting and search, RateView rate lookups, BookNow instant booking, and shipment tracking, primarily for Transportation Management Systems (TMS) and freight platforms.\n\nIMPORTANT - MODELED: The developer portal is gated behind an account login (Redocly OIDC), so the exact base URLs, endpoint paths, request parameters, and response schemas below could NOT be confirmed against the live reference in this build. They are honestly modeled from DAT's publicly documented capabilities (LoadSearch for postings, RateView for analytics) and its documented two-tier organization/user token authentication. The host names (identity.api.dat.com, freight.api.dat.com, analytics.api.dat.com) represent the plausible service split and should be reconciled against the portal once access is granted.\n\nAccess is subscription-gated. RESTful integration requires a DAT One load board subscription plus a service (organization) account; RateView access requires a Combo Pro or Combo Premium subscription. CarrierWatch and OnBoard do not currently support RESTful API integration. Contact developersupport@dat.com for portal access.\n\nContact Support:\n Name: DAT Developer Support\n Email: developersupport@dat.com",
+      "type": "text/plain"
+    }
+  }
+}

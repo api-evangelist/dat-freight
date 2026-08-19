@@ -1,0 +1,197 @@
+{
+  "item": [
+    {
+      "id": "e769d8a8-1581-4771-9474-278b6e56a194",
+      "name": "RateView",
+      "description": {
+        "content": "Spot and contract freight-rate lookups.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "0d075576-1f08-4d55-98fa-874a35c67c2b",
+          "name": "Look up RateView freight rates (modeled)",
+          "request": {
+            "name": "Look up RateView freight rates (modeled)",
+            "description": {
+              "content": "Retrieve RateView spot and contract benchmark rates for one or more lanes by origin, destination, and equipment type. Requires a RateView Combo Pro or Combo Premium subscription. MODELED path and schema.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "linehaulrates",
+                "v1",
+                "lookups"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"origin\": {\n    \"city\": \"<string>\",\n    \"stateProvince\": \"<string>\",\n    \"postalCode\": \"<string>\",\n    \"country\": \"<string>\"\n  },\n  \"destination\": {\n    \"city\": \"<string>\",\n    \"stateProvince\": \"<string>\",\n    \"postalCode\": \"<string>\",\n    \"country\": \"<string>\"\n  },\n  \"equipment\": \"<string>\",\n  \"rateType\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "2a502699-97ef-4dd6-a9a6-e07c7ad5f1b0",
+              "name": "Rate lookup results.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "linehaulrates",
+                    "v1",
+                    "lookups"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"origin\": {\n    \"city\": \"<string>\",\n    \"stateProvince\": \"<string>\",\n    \"postalCode\": \"<string>\",\n    \"country\": \"<string>\"\n  },\n  \"destination\": {\n    \"city\": \"<string>\",\n    \"stateProvince\": \"<string>\",\n    \"postalCode\": \"<string>\",\n    \"country\": \"<string>\"\n  },\n  \"equipment\": \"<string>\",\n  \"rateType\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"rate\": {\n    \"averageRate\": 5506.034499241475,\n    \"lowRate\": 4620.09701640654,\n    \"highRate\": 3616.9737305232284,\n    \"currency\": \"USD\",\n    \"rateType\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7b74d7b2-fdc0-4ca1-93db-6a3cf318f835",
+              "name": "Missing or invalid token.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "linehaulrates",
+                    "v1",
+                    "lookups"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"origin\": {\n    \"city\": \"<string>\",\n    \"stateProvince\": \"<string>\",\n    \"postalCode\": \"<string>\",\n    \"country\": \"<string>\"\n  },\n  \"destination\": {\n    \"city\": \"<string>\",\n    \"stateProvince\": \"<string>\",\n    \"postalCode\": \"<string>\",\n    \"country\": \"<string>\"\n  },\n  \"equipment\": \"<string>\",\n  \"rateType\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://identity.api.dat.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "ba5f8dcf-e563-4503-94ce-1cdd5b791b3a",
+    "name": "DAT Freight & Analytics API (Modeled) BookNow RateView API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "A modeled OpenAPI description of the DAT Freight & Analytics RESTful API suite exposed through the DAT Developer Portal (developer.dat.com). DAT operates the DAT One load board and RateView freight-rate benchmark and offers RESTful integrations for load posting and search, RateView rate lookups, BookNow instant booking, and shipment tracking, primarily for Transportation Management Systems (TMS) and freight platforms.\n\nIMPORTANT - MODELED: The developer portal is gated behind an account login (Redocly OIDC), so the exact base URLs, endpoint paths, request parameters, and response schemas below could NOT be confirmed against the live reference in this build. They are honestly modeled from DAT's publicly documented capabilities (LoadSearch for postings, RateView for analytics) and its documented two-tier organization/user token authentication. The host names (identity.api.dat.com, freight.api.dat.com, analytics.api.dat.com) represent the plausible service split and should be reconciled against the portal once access is granted.\n\nAccess is subscription-gated. RESTful integration requires a DAT One load board subscription plus a service (organization) account; RateView access requires a Combo Pro or Combo Premium subscription. CarrierWatch and OnBoard do not currently support RESTful API integration. Contact developersupport@dat.com for portal access.\n\nContact Support:\n Name: DAT Developer Support\n Email: developersupport@dat.com",
+      "type": "text/plain"
+    }
+  }
+}

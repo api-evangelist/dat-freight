@@ -1,0 +1,197 @@
+{
+  "item": [
+    {
+      "id": "e6b7e2f7-5d08-48d9-9bd4-d4f828532e73",
+      "name": "BookNow",
+      "description": {
+        "content": "Instant digital load booking.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "bee48ac9-7caf-4ce6-81e7-f297eebe386a",
+          "name": "Book a load (modeled)",
+          "request": {
+            "name": "Book a load (modeled)",
+            "description": {
+              "content": "Book a bookable (BookNow) load at its posted rate. MODELED path.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "booknow",
+                "v1",
+                "bookings"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"assetId\": \"<string>\",\n  \"carrierMcNumber\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "07102a31-ce0f-4eb5-b12a-380e24f88ce5",
+              "name": "The created booking.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "booknow",
+                    "v1",
+                    "bookings"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"assetId\": \"<string>\",\n  \"carrierMcNumber\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"assetId\": \"string\",\n  \"status\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "70f3758e-7f39-4ecc-896a-a4aae86c0db6",
+              "name": "Missing or invalid token.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "booknow",
+                    "v1",
+                    "bookings"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"assetId\": \"<string>\",\n  \"carrierMcNumber\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://identity.api.dat.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "82f3f138-efdb-4a7e-858f-ce3298f96918",
+    "name": "DAT Freight & Analytics API (Modeled) BookNow API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "A modeled OpenAPI description of the DAT Freight & Analytics RESTful API suite exposed through the DAT Developer Portal (developer.dat.com). DAT operates the DAT One load board and RateView freight-rate benchmark and offers RESTful integrations for load posting and search, RateView rate lookups, BookNow instant booking, and shipment tracking, primarily for Transportation Management Systems (TMS) and freight platforms.\n\nIMPORTANT - MODELED: The developer portal is gated behind an account login (Redocly OIDC), so the exact base URLs, endpoint paths, request parameters, and response schemas below could NOT be confirmed against the live reference in this build. They are honestly modeled from DAT's publicly documented capabilities (LoadSearch for postings, RateView for analytics) and its documented two-tier organization/user token authentication. The host names (identity.api.dat.com, freight.api.dat.com, analytics.api.dat.com) represent the plausible service split and should be reconciled against the portal once access is granted.\n\nAccess is subscription-gated. RESTful integration requires a DAT One load board subscription plus a service (organization) account; RateView access requires a Combo Pro or Combo Premium subscription. CarrierWatch and OnBoard do not currently support RESTful API integration. Contact developersupport@dat.com for portal access.\n\nContact Support:\n Name: DAT Developer Support\n Email: developersupport@dat.com",
+      "type": "text/plain"
+    }
+  }
+}

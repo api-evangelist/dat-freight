@@ -1,0 +1,68 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "DAT Freight & Analytics API (Modeled) BookNow Freight Posting API",
+    "version": "1.0-modeled"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Freight Posting",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List load and truck postings (modeled)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://identity.api.dat.com/loadboard/v2/assets"
+          },
+          "docs": "List the organization's current load and truck postings (assets). MODELED path."
+        },
+        {
+          "info": {
+            "name": "Create a posting (modeled)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://identity.api.dat.com/loadboard/v2/assets",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Post a load or truck to the DAT One load board. MODELED path."
+        },
+        {
+          "info": {
+            "name": "Remove a posting (modeled)",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://identity.api.dat.com/loadboard/v2/assets/:assetId",
+            "params": [
+              {
+                "name": "assetId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Remove a load or truck posting. MODELED path."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
