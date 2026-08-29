@@ -194,6 +194,9 @@ apis:
   - type: Documentation
     url: https://www.dat.com/resources/shipper-api-integrations
 common:
+- type: CapabilityMap
+  url: capabilities/dat-freight-capability-edges.yml
+  name: DAT Freight & Analytics Business Capability Map
 - type: AgenticAccess
   url: agentic-access/dat-freight-agentic-access.yml
 - type: DomainSecurity

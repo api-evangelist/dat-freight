@@ -1,0 +1,44 @@
+slug: dat-freight
+provider: DAT Freight & Analytics
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Transportation & Logistics
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 3
+edges:
+- tag: Tracking
+  spec_file: dat-freight-tracking-api-openapi.yml
+  capability_id: BC-2510.20
+  capability_id_l1: BC-2510
+  capability_name: Shipment Tracking Management
+  confidence: 0.9
+  evidence: POST /tracking/v1/shipments  registerShipment  Register a shipment for tracking; GET /tracking/v1/shipments/{shipmentId}  getShipment  Get
+    shipment status
+  reason: Operations register shipments and return shipment status, which is plainly shipment tracking/visibility.
+- tag: RateView
+  spec_file: dat-freight-rateview-api-openapi.yml
+  capability_id: BC-2520.30
+  capability_id_l1: BC-2520
+  capability_name: Spot Rate Management
+  confidence: 0.8
+  evidence: POST /linehaulrates/v1/lookups  lookupRates  Look up RateView freight rates (modeled)
+  reason: RateView provides spot and contract linehaul freight rate benchmarks; the lookup operation prices/benchmarks
+    freight rates, fitting Spot Rate Management within Freight Rating & Tariff Management (contract rate
+    benchmarking also in scope, hence 0.8).
+- tag: BookNow
+  spec_file: dat-freight-booknow-api-openapi.yml
+  capability_id: BC-2400.40
+  capability_id_l1: BC-2400
+  capability_name: Booking and Reservation Management
+  confidence: 0.75
+  evidence: POST /booknow/v1/bookings  createBooking  Book a load (modeled); schemas BookingRequest, Booking
+  reason: Single operation accepts an instant booking of a load against posted freight, i.e. acceptance
+    of a capacity booking — Booking and Reservation Management. Some ambiguity vs. carrier procurement
+    booking on the brokerage side.
