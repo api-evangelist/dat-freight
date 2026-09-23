@@ -1,12 +1,7 @@
 {
   "provider": "dat-freight",
   "sources": [
-    "dat-freight-booknow-api-openapi.yml",
-    "dat-freight-freight-posting-api-openapi.yml",
-    "dat-freight-identity-api-openapi.yml",
-    "dat-freight-load-board-search-api-openapi.yml",
-    "dat-freight-rateview-api-openapi.yml",
-    "dat-freight-tracking-api-openapi.yml"
+    "_original/dat-freight-openapi.yml"
   ],
   "outputs": [
     "dat-freight-booknow-api-openapi.yml",
@@ -19,6 +14,17 @@
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "dat-freight-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "dat-freight-booknow-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "dat-freight-freight-posting-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "dat-freight-identity-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "dat-freight-load-board-search-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "dat-freight-rateview-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "dat-freight-tracking-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }
