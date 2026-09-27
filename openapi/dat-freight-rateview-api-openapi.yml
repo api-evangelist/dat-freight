@@ -45,14 +45,14 @@ paths:
         '401':
           $ref: '#/components/responses/Unauthorized'
 components:
+  responses:
+    Unauthorized:
+      description: Missing or invalid token.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   schemas:
-    Error:
-      type: object
-      properties:
-        code:
-          type: string
-        message:
-          type: string
     RateLookupRequest:
       type: object
       required:
@@ -71,6 +71,13 @@ components:
           enum:
           - SPOT
           - CONTRACT
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
     Location:
       type: object
       properties:
@@ -99,13 +106,6 @@ components:
               example: USD
             rateType:
               type: string
-  responses:
-    Unauthorized:
-      description: Missing or invalid token.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   securitySchemes:
     userToken:
       type: http

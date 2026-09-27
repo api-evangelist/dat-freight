@@ -69,46 +69,6 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 components:
-  schemas:
-    Error:
-      type: object
-      properties:
-        code:
-          type: string
-        message:
-          type: string
-    Shipment:
-      type: object
-      properties:
-        id:
-          type: string
-        status:
-          type: string
-        lastLocation:
-          $ref: '#/components/schemas/Location'
-        updatedWhen:
-          type: string
-          format: date-time
-    ShipmentInput:
-      type: object
-      required:
-      - referenceNumber
-      properties:
-        referenceNumber:
-          type: string
-        carrierMcNumber:
-          type: string
-    Location:
-      type: object
-      properties:
-        city:
-          type: string
-        stateProvince:
-          type: string
-        postalCode:
-          type: string
-        country:
-          type: string
   responses:
     Unauthorized:
       description: Missing or invalid token.
@@ -122,6 +82,46 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
+  schemas:
+    ShipmentInput:
+      type: object
+      required:
+      - referenceNumber
+      properties:
+        referenceNumber:
+          type: string
+        carrierMcNumber:
+          type: string
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+    Location:
+      type: object
+      properties:
+        city:
+          type: string
+        stateProvince:
+          type: string
+        postalCode:
+          type: string
+        country:
+          type: string
+    Shipment:
+      type: object
+      properties:
+        id:
+          type: string
+        status:
+          type: string
+        lastLocation:
+          $ref: '#/components/schemas/Location'
+        updatedWhen:
+          type: string
+          format: date-time
   securitySchemes:
     userToken:
       type: http

@@ -45,6 +45,13 @@ paths:
         '401':
           $ref: '#/components/responses/Unauthorized'
 components:
+  responses:
+    Unauthorized:
+      description: Missing or invalid token.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   schemas:
     Error:
       type: object
@@ -53,6 +60,13 @@ components:
           type: string
         message:
           type: string
+    LoadSearchResults:
+      type: object
+      properties:
+        matches:
+          type: array
+          items:
+            $ref: '#/components/schemas/Asset'
     Asset:
       type: object
       properties:
@@ -74,6 +88,17 @@ components:
         postedWhen:
           type: string
           format: date-time
+    Location:
+      type: object
+      properties:
+        city:
+          type: string
+        stateProvince:
+          type: string
+        postalCode:
+          type: string
+        country:
+          type: string
     LoadSearchRequest:
       type: object
       properties:
@@ -86,31 +111,6 @@ components:
           description: Equipment code, e.g. V (van), R (reefer), F (flatbed).
         maxAgeMinutes:
           type: integer
-    LoadSearchResults:
-      type: object
-      properties:
-        matches:
-          type: array
-          items:
-            $ref: '#/components/schemas/Asset'
-    Location:
-      type: object
-      properties:
-        city:
-          type: string
-        stateProvince:
-          type: string
-        postalCode:
-          type: string
-        country:
-          type: string
-  responses:
-    Unauthorized:
-      description: Missing or invalid token.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   securitySchemes:
     userToken:
       type: http
