@@ -85,27 +85,7 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 components:
-  responses:
-    Unauthorized:
-      description: Missing or invalid token.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    NotFound:
-      description: Resource not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   schemas:
-    Error:
-      type: object
-      properties:
-        code:
-          type: string
-        message:
-          type: string
     AssetInput:
       type: object
       required:
@@ -126,6 +106,24 @@ components:
           type: string
         rate:
           type: number
+    Location:
+      type: object
+      properties:
+        city:
+          type: string
+        stateProvince:
+          type: string
+        postalCode:
+          type: string
+        country:
+          type: string
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
     Asset:
       type: object
       properties:
@@ -147,17 +145,19 @@ components:
         postedWhen:
           type: string
           format: date-time
-    Location:
-      type: object
-      properties:
-        city:
-          type: string
-        stateProvince:
-          type: string
-        postalCode:
-          type: string
-        country:
-          type: string
+  responses:
+    NotFound:
+      description: Resource not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Missing or invalid token.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   securitySchemes:
     userToken:
       type: http

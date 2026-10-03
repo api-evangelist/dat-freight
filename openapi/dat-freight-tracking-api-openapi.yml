@@ -70,14 +70,14 @@ paths:
           $ref: '#/components/responses/NotFound'
 components:
   responses:
-    Unauthorized:
-      description: Missing or invalid token.
+    NotFound:
+      description: Resource not found.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    NotFound:
-      description: Resource not found.
+    Unauthorized:
+      description: Missing or invalid token.
       content:
         application/json:
           schema:
@@ -91,13 +91,6 @@ components:
         referenceNumber:
           type: string
         carrierMcNumber:
-          type: string
-    Error:
-      type: object
-      properties:
-        code:
-          type: string
-        message:
           type: string
     Location:
       type: object
@@ -122,6 +115,13 @@ components:
         updatedWhen:
           type: string
           format: date-time
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
   securitySchemes:
     userToken:
       type: http

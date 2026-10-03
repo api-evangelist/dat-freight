@@ -68,14 +68,19 @@ paths:
         '401':
           $ref: '#/components/responses/Unauthorized'
 components:
-  responses:
-    Unauthorized:
-      description: Missing or invalid token.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   schemas:
+    OrganizationTokenRequest:
+      type: object
+      required:
+      - username
+      - password
+      properties:
+        username:
+          type: string
+          description: Service-account (organization) email.
+        password:
+          type: string
+          description: Service-account password.
     UserTokenRequest:
       type: object
       required:
@@ -91,18 +96,6 @@ components:
           type: string
         message:
           type: string
-    OrganizationTokenRequest:
-      type: object
-      required:
-      - username
-      - password
-      properties:
-        username:
-          type: string
-          description: Service-account (organization) email.
-        password:
-          type: string
-          description: Service-account password.
     TokenResponse:
       type: object
       properties:
@@ -111,6 +104,13 @@ components:
         expiresWhen:
           type: string
           format: date-time
+  responses:
+    Unauthorized:
+      description: Missing or invalid token.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   securitySchemes:
     userToken:
       type: http
