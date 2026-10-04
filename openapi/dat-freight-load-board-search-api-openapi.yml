@@ -46,6 +46,13 @@ paths:
           $ref: '#/components/responses/Unauthorized'
 components:
   schemas:
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
     LoadSearchResults:
       type: object
       properties:
@@ -53,18 +60,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Asset'
-    LoadSearchRequest:
-      type: object
-      properties:
-        origin:
-          $ref: '#/components/schemas/Location'
-        destination:
-          $ref: '#/components/schemas/Location'
-        equipmentType:
-          type: string
-          description: Equipment code, e.g. V (van), R (reefer), F (flatbed).
-        maxAgeMinutes:
-          type: integer
     Location:
       type: object
       properties:
@@ -75,13 +70,6 @@ components:
         postalCode:
           type: string
         country:
-          type: string
-    Error:
-      type: object
-      properties:
-        code:
-          type: string
-        message:
           type: string
     Asset:
       type: object
@@ -104,6 +92,18 @@ components:
         postedWhen:
           type: string
           format: date-time
+    LoadSearchRequest:
+      type: object
+      properties:
+        origin:
+          $ref: '#/components/schemas/Location'
+        destination:
+          $ref: '#/components/schemas/Location'
+        equipmentType:
+          type: string
+          description: Equipment code, e.g. V (van), R (reefer), F (flatbed).
+        maxAgeMinutes:
+          type: integer
   responses:
     Unauthorized:
       description: Missing or invalid token.

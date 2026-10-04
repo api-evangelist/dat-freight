@@ -46,17 +46,6 @@ paths:
           $ref: '#/components/responses/Unauthorized'
 components:
   schemas:
-    Location:
-      type: object
-      properties:
-        city:
-          type: string
-        stateProvince:
-          type: string
-        postalCode:
-          type: string
-        country:
-          type: string
     Error:
       type: object
       properties:
@@ -81,6 +70,17 @@ components:
               example: USD
             rateType:
               type: string
+    Location:
+      type: object
+      properties:
+        city:
+          type: string
+        stateProvince:
+          type: string
+        postalCode:
+          type: string
+        country:
+          type: string
     RateLookupRequest:
       type: object
       required:

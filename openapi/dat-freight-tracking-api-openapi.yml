@@ -69,39 +69,13 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 components:
-  responses:
-    NotFound:
-      description: Resource not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Missing or invalid token.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   schemas:
-    ShipmentInput:
-      type: object
-      required:
-      - referenceNumber
-      properties:
-        referenceNumber:
-          type: string
-        carrierMcNumber:
-          type: string
-    Location:
+    Error:
       type: object
       properties:
-        city:
+        code:
           type: string
-        stateProvince:
-          type: string
-        postalCode:
-          type: string
-        country:
+        message:
           type: string
     Shipment:
       type: object
@@ -115,13 +89,39 @@ components:
         updatedWhen:
           type: string
           format: date-time
-    Error:
+    Location:
       type: object
       properties:
-        code:
+        city:
           type: string
-        message:
+        stateProvince:
           type: string
+        postalCode:
+          type: string
+        country:
+          type: string
+    ShipmentInput:
+      type: object
+      required:
+      - referenceNumber
+      properties:
+        referenceNumber:
+          type: string
+        carrierMcNumber:
+          type: string
+  responses:
+    NotFound:
+      description: Resource not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Missing or invalid token.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   securitySchemes:
     userToken:
       type: http

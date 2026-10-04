@@ -69,6 +69,21 @@ paths:
           $ref: '#/components/responses/Unauthorized'
 components:
   schemas:
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+    UserTokenRequest:
+      type: object
+      required:
+      - username
+      properties:
+        username:
+          type: string
+          description: Email of the user making requests.
     OrganizationTokenRequest:
       type: object
       required:
@@ -81,21 +96,6 @@ components:
         password:
           type: string
           description: Service-account password.
-    UserTokenRequest:
-      type: object
-      required:
-      - username
-      properties:
-        username:
-          type: string
-          description: Email of the user making requests.
-    Error:
-      type: object
-      properties:
-        code:
-          type: string
-        message:
-          type: string
     TokenResponse:
       type: object
       properties:

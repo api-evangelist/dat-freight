@@ -45,14 +45,14 @@ paths:
         '401':
           $ref: '#/components/responses/Unauthorized'
 components:
-  responses:
-    Unauthorized:
-      description: Missing or invalid token.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   schemas:
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
     BookingRequest:
       type: object
       required:
@@ -61,13 +61,6 @@ components:
         assetId:
           type: string
         carrierMcNumber:
-          type: string
-    Error:
-      type: object
-      properties:
-        code:
-          type: string
-        message:
           type: string
     Booking:
       type: object
@@ -78,6 +71,13 @@ components:
           type: string
         status:
           type: string
+  responses:
+    Unauthorized:
+      description: Missing or invalid token.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   securitySchemes:
     userToken:
       type: http
