@@ -60,17 +60,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Asset'
-    Location:
-      type: object
-      properties:
-        city:
-          type: string
-        stateProvince:
-          type: string
-        postalCode:
-          type: string
-        country:
-          type: string
     Asset:
       type: object
       properties:
@@ -104,6 +93,17 @@ components:
           description: Equipment code, e.g. V (van), R (reefer), F (flatbed).
         maxAgeMinutes:
           type: integer
+    Location:
+      type: object
+      properties:
+        city:
+          type: string
+        stateProvince:
+          type: string
+        postalCode:
+          type: string
+        country:
+          type: string
   responses:
     Unauthorized:
       description: Missing or invalid token.

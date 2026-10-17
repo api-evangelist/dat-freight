@@ -46,12 +46,14 @@ paths:
           $ref: '#/components/responses/Unauthorized'
 components:
   schemas:
-    Error:
+    Booking:
       type: object
       properties:
-        code:
+        id:
           type: string
-        message:
+        assetId:
+          type: string
+        status:
           type: string
     BookingRequest:
       type: object
@@ -62,14 +64,12 @@ components:
           type: string
         carrierMcNumber:
           type: string
-    Booking:
+    Error:
       type: object
       properties:
-        id:
+        code:
           type: string
-        assetId:
-          type: string
-        status:
+        message:
           type: string
   responses:
     Unauthorized:

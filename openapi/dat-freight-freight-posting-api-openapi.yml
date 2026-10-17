@@ -93,37 +93,6 @@ components:
           type: string
         message:
           type: string
-    AssetInput:
-      type: object
-      required:
-      - assetType
-      - origin
-      - equipmentType
-      properties:
-        assetType:
-          type: string
-          enum:
-          - LOAD
-          - TRUCK
-        origin:
-          $ref: '#/components/schemas/Location'
-        destination:
-          $ref: '#/components/schemas/Location'
-        equipmentType:
-          type: string
-        rate:
-          type: number
-    Location:
-      type: object
-      properties:
-        city:
-          type: string
-        stateProvince:
-          type: string
-        postalCode:
-          type: string
-        country:
-          type: string
     Asset:
       type: object
       properties:
@@ -145,6 +114,37 @@ components:
         postedWhen:
           type: string
           format: date-time
+    Location:
+      type: object
+      properties:
+        city:
+          type: string
+        stateProvince:
+          type: string
+        postalCode:
+          type: string
+        country:
+          type: string
+    AssetInput:
+      type: object
+      required:
+      - assetType
+      - origin
+      - equipmentType
+      properties:
+        assetType:
+          type: string
+          enum:
+          - LOAD
+          - TRUCK
+        origin:
+          $ref: '#/components/schemas/Location'
+        destination:
+          $ref: '#/components/schemas/Location'
+        equipmentType:
+          type: string
+        rate:
+          type: number
   responses:
     NotFound:
       description: Resource not found.

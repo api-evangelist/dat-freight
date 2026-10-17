@@ -76,14 +76,6 @@ components:
           type: string
         message:
           type: string
-    UserTokenRequest:
-      type: object
-      required:
-      - username
-      properties:
-        username:
-          type: string
-          description: Email of the user making requests.
     OrganizationTokenRequest:
       type: object
       required:
@@ -104,6 +96,14 @@ components:
         expiresWhen:
           type: string
           format: date-time
+    UserTokenRequest:
+      type: object
+      required:
+      - username
+      properties:
+        username:
+          type: string
+          description: Email of the user making requests.
   responses:
     Unauthorized:
       description: Missing or invalid token.

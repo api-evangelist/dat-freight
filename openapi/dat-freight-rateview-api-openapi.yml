@@ -46,6 +46,24 @@ paths:
           $ref: '#/components/responses/Unauthorized'
 components:
   schemas:
+    RateLookupRequest:
+      type: object
+      required:
+      - origin
+      - destination
+      - equipment
+      properties:
+        origin:
+          $ref: '#/components/schemas/Location'
+        destination:
+          $ref: '#/components/schemas/Location'
+        equipment:
+          type: string
+        rateType:
+          type: string
+          enum:
+          - SPOT
+          - CONTRACT
     Error:
       type: object
       properties:
@@ -81,24 +99,6 @@ components:
           type: string
         country:
           type: string
-    RateLookupRequest:
-      type: object
-      required:
-      - origin
-      - destination
-      - equipment
-      properties:
-        origin:
-          $ref: '#/components/schemas/Location'
-        destination:
-          $ref: '#/components/schemas/Location'
-        equipment:
-          type: string
-        rateType:
-          type: string
-          enum:
-          - SPOT
-          - CONTRACT
   responses:
     Unauthorized:
       description: Missing or invalid token.
