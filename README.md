@@ -1,4 +1,4 @@
-# DAT Freight & Analytics (dat-freight)
+# DAT Freight & Analytics
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -64,103 +64,128 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-DAT Freight & Analytics operates the largest truckload freight marketplace in North America - the DAT One load board - along with **RateView**, the industry's benchmark for spot and contract freight rates drawn from hundreds of billions of dollars in real transactions. DAT exposes these products to Transportation Management Systems (TMS) and freight platforms through the **DAT Developer Portal** (developer.dat.com) as a RESTful API suite covering load posting and search, RateView rate lookups, BookNow instant booking, and shipment tracking.
+DAT Freight & Analytics operates the largest truckload freight marketplace in North America - the DAT One load board - along with RateView, the industry's benchmark for spot and contract freight rates drawn from hundreds of billions of dollars in real transactions. DAT exposes these products to Transportation Management Systems (TMS) and freight platforms through the DAT Developer Portal (developer.dat.com), a RESTful API suite covering load posting and search, RateView rate lookups, BookNow instant booking, and shipment tracking. Access is subscription-gated: RESTful integration requires a DAT One load board subscription and a service (organization) account, and RateView access requires a Combo Pro or Combo Premium plan. Every request is authenticated with a two-tier token model - an organization token issued from service-account credentials plus a user token for the account making the call.
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/dat-freight/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/dat-freight/refs/heads/main/apis.yml)
+**Areas:** Freight · Trucking · Load Board · Logistics · Freight Rates · RateView · Supply Chain · Transportation · Analytics
 
-## Access Model (Read This First)
+## DAT Freight & Analytics on APIs.io
 
-DAT's API is **not** a self-serve, publicly documented API. Access is gated on two fronts:
+Everything profiled for DAT Freight & Analytics is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/dat-freight/](https://apis.io/providers/dat-freight/)** — or go straight to one of the APIs or properties below.
 
-- **The developer portal is behind an account login.** developer.dat.com is a Redocly-hosted portal that redirects to an OIDC sign-in; you must have a DAT account and request developer access (developersupport@dat.com) to read the reference.
-- **Access is subscription-gated.** A RESTful integration requires a **DAT One load board subscription** plus a **service (organization) account**. The **RateView Rate Lookup API** additionally requires a **Combo Pro** or **Combo Premium** subscription. **CarrierWatch** and **OnBoard** do **not** currently support RESTful API integration.
+### APIs (6)
 
-Authentication is a documented **two-tier token model**: an **organization token** is minted from service-account (organization) credentials, and a **user token** is minted for the specific user account making requests. The user token is then sent as a Bearer token on data requests.
+- [DAT Freight & Analytics BookNow API](https://apis.io/apis/dat-freight/dat-freight-booknow-api/) — Instant digital load booking.
+- [DAT Freight & Analytics Freight Posting API](https://apis.io/apis/dat-freight/dat-freight-freight-posting-api/) — Create and manage load and truck postings.
+- [DAT Freight & Analytics Identity API](https://apis.io/apis/dat-freight/dat-freight-identity-api/) — Two-tier organization and user token issuance.
+- [DAT Freight & Analytics Load Board Search API](https://apis.io/apis/dat-freight/dat-freight-load-board-search-api/) — Search available loads and trucks on the DAT One marketplace.
+- [DAT Freight & Analytics RateView API](https://apis.io/apis/dat-freight/dat-freight-rateview-api/) — Spot and contract freight-rate lookups.
+- [DAT Freight & Analytics Tracking API](https://apis.io/apis/dat-freight/dat-freight-tracking-api/) — Shipment location and status visibility.
 
-### Endpoints are MODELED
+### Published properties
 
-Because the portal reference could not be inspected during this catalog build (account-gated), the OpenAPI, Postman, and Open Collection artifacts here are **honestly modeled** from DAT's publicly documented capabilities (LoadSearch for postings, RateView for analytics, BookNow, Tracking) and its documented organization/user token auth. The host split - `identity.api.dat.com`, `freight.api.dat.com`, `analytics.api.dat.com` - and the exact paths and schemas are a plausible model, **not confirmed facts**, and should be reconciled once portal access is granted. See `review.yml` (`endpointsModeled: true`).
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-## Tags
+#### Agentic access (1)
 
-- Freight
-- Trucking
-- Load Board
-- Logistics
-- Freight Rates
-- RateView
-- Supply Chain
-- Transportation
-- Analytics
+Which operations an agent can call, which act, and which need a human in the loop.
 
-## Timestamps
+- [Dat Freight Agentic Access](https://apis.io/agentic-access/dat-freight/dat-freight-agentic-access/)
 
-- **Created:** 2026-07-05
-- **Modified:** 2026-07-05
+#### Collections (7)
 
-## APIs
+Postman and Open Collection request collections.
 
-### DAT Identity & Token API
+- [DAT Freight & Analytics API (Modeled)](https://apis.io/collections/dat-freight/open-dat-freight/)
+- [DAT Freight & Analytics API (Modeled) BookNow API](https://apis.io/collections/dat-freight/open-dat-freight-booknow-api/)
+- [DAT Freight & Analytics API (Modeled) BookNow Freight Posting API](https://apis.io/collections/dat-freight/open-dat-freight-freight-posting-api/)
+- [DAT Freight & Analytics API (Modeled) BookNow Identity API](https://apis.io/collections/dat-freight/open-dat-freight-identity-api/)
+- [DAT Freight & Analytics API (Modeled) BookNow Load Board Search API](https://apis.io/collections/dat-freight/open-dat-freight-load-board-search-api/)
+- [DAT Freight & Analytics API (Modeled) BookNow RateView API](https://apis.io/collections/dat-freight/open-dat-freight-rateview-api/)
+- [DAT Freight & Analytics API (Modeled) BookNow Tracking API](https://apis.io/collections/dat-freight/open-dat-freight-tracking-api/)
 
-Issues the two-tier access tokens every other DAT API requires - an organization token from service-account credentials plus a user token for the requesting user. *Endpoints modeled.*
+#### Security (2)
 
-- **Human URL:** [https://developer.dat.com/](https://developer.dat.com/)
-- **Base URL:** `https://identity.api.dat.com` *(modeled host)*
+Authentication, trust centre, and vulnerability disclosure.
 
-### DAT Load Board Search API
+- [Dat Freight Authentication](https://apis.io/security/dat-freight/dat-freight-authentication/)
+- [Dat Freight Domain Security](https://apis.io/security/dat-freight/dat-freight-domain-security/)
 
-Search the DAT One marketplace for available loads and trucks by lane, equipment type, and age - the LoadSearch surface used by TMS integrations. Available with any DAT One load board subscription. *Endpoints modeled.*
+#### Plans and pricing (1)
 
-- **Human URL:** [https://www.dat.com/api-integration](https://www.dat.com/api-integration)
-- **Base URL:** `https://freight.api.dat.com` *(modeled host)*
+Published plans, tiers and prices.
 
-### DAT Freight Posting API
+- [Dat Freight Plans Pricing](https://apis.io/plans/dat-freight/dat-freight-plans-pricing/)
 
-Create, update, refresh, and remove load and truck postings on the DAT One load board directly from a TMS. *Endpoints modeled.*
+#### Rate limits (1)
 
-- **Human URL:** [https://www.dat.com/api-integration](https://www.dat.com/api-integration)
-- **Base URL:** `https://freight.api.dat.com` *(modeled host)*
+Published request limits.
 
-### DAT RateView Rate Lookup API
+- [Dat Freight Rate Limits](https://apis.io/rate-limits/dat-freight/dat-freight-rate-limits/)
 
-Look up RateView benchmark freight rates - spot and contract linehaul rates by origin, destination, and equipment type - for rate benchmarking, historical analysis, and lane-level performance. Requires a RateView Combo Pro or Combo Premium subscription plus Connexion and RateView seats. *Endpoints modeled.*
+#### FinOps (1)
 
-- **Human URL:** [https://www.dat.com/resources/shipper-api-integrations](https://www.dat.com/resources/shipper-api-integrations)
-- **Base URL:** `https://analytics.api.dat.com` *(modeled host)*
+What the API costs to run, by operation.
 
-### DAT BookNow API
+- [Dat Freight Finops](https://apis.io/finops/dat-freight/dat-freight-finops/)
 
-Instant, digital load booking (BookNow) so carriers can accept a posted load at a set rate without a phone call, and brokers can offer bookable freight programmatically. *Endpoints modeled.*
+## Where to find this API
 
-- **Human URL:** [https://www.dat.com/api-integration](https://www.dat.com/api-integration)
-- **Base URL:** `https://freight.api.dat.com` *(modeled host)*
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
 
-### DAT Tracking API
-
-DAT Tracking shipment visibility - register loads for tracking and retrieve location and status updates for in-transit freight. *Endpoints modeled.*
-
-- **Human URL:** [https://www.dat.com/api-integration](https://www.dat.com/api-integration)
-- **Base URL:** `https://freight.api.dat.com` *(modeled host)*
-
-## Common Properties
-
-- [LinkedIn](https://www.linkedin.com/company/dat-solutions)
 - [Website](https://www.dat.com)
 - [Documentation](https://developer.dat.com/)
-- [Sign Up](https://www.dat.com/api-integration)
-- [Plans](plans/dat-freight-plans-pricing.yml)
-- [Rate Limits](rate-limits/dat-freight-rate-limits.yml)
-- [Fin Ops](finops/dat-freight-finops.yml)
+- [Sign up](https://www.dat.com/api-integration)
 - [Blog](https://www.dat.com/blog)
 
-## Artifacts
+## API Evangelist rating
 
-- [OpenAPI (modeled)](openapi/dat-freight-openapi.yml)
-- [Postman Collection (modeled)](collections/dat-freight.postman_collection.json)
-- [Open Collection (modeled)](collections/dat-freight.opencollection.json)
-- [Review](review.yml)
+**Kin Score 28.3** — thin · rubric 0.24.0 · scored 2026-10-17
 
-## Maintainers
+| Facet | Score |
+|---|---|
+| Discoverability | 66.1 |
+| Contract quality | 50.5 |
+| Contract governance | 0.0 |
+| Operational transparency | 7.9 |
+| Developer ergonomics | 25.0 |
+| Access clarity | 21.1 |
 
-**FN:** Kin Lane
-**Email:** kin@apievangelist.com
+**Agent readiness 17.9** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | — |
+| OpenAPI Examples | — |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 11.8** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/dat-freight/](https://apis.io/providers/dat-freight/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for DAT Freight & Analytics: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/dat-freight/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
